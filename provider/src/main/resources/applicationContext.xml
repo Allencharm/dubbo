@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://dubbo.apache.org/schema/dubbo
+       http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!--扫描包-->
+    <context:component-scan base-package="com.dubbo"></context:component-scan>
+
+    <!--注册中心配置-->
+    <!--服务提供方命名以及端口-->
+    <dubbo:application name="provider"></dubbo:application>
+    <dubbo:protocol port="20881" name="dubbo"></dubbo:protocol>
+    <!--注册中心地址-->
+    <dubbo:registry address="zookeeper://192.168.157.135:2181?backup=192.168.157.135:2182,192.168.157.135:2183"></dubbo:registry>
+    <!--指定要注册的功能-->
+    <dubbo:service interface="com.dubbo.DubboService" ref="dubboServiceImpl"></dubbo:service>
+</beans>
